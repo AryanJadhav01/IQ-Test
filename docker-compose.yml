@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: college_simplified_iq_db
+    restart: always
+    environment:
+      POSTGRES_USER: iq_user
+      POSTGRES_PASSWORD: iq_password
+      POSTGRES_DB: iq_assessment_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
