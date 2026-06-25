@@ -449,7 +449,7 @@ function DashboardContent() {
                           </div>
                           
                           <a
-                            href={`http://${typeof window !== 'undefined' ? window.location.hostname : 'localhost'}:5000/api/certificate/download?assessmentId=${activeResult.assessmentId}&studentName=${encodeURIComponent(certName || 'Valued Student')}`}
+                            href={`/api/certificate/download?assessmentId=${activeResult.assessmentId}&studentName=${encodeURIComponent(certName || 'Valued Student')}`}
                             className="px-5 py-3 bg-primary hover:bg-black text-white font-bold text-xs rounded-xl flex items-center gap-2 transition-all duration-300 cursor-pointer w-full md:w-auto text-center justify-center shadow-md shadow-red-500/10 shrink-0 h-10"
                           >
                             <Download className="w-4 h-4" />

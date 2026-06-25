@@ -1,9 +1,4 @@
-let BASE_URL = 'http://localhost:5000/api';
-
-if (typeof window !== 'undefined') {
-  const host = window.location.hostname;
-  BASE_URL = `http://${host}:5000/api`;
-}
+const BASE_URL = '/api';
 
 interface RequestOptions {
   method?: string;
