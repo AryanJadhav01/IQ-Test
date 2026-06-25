@@ -13,28 +13,14 @@ import {
   CheckCircle2, 
   Award, 
   Clock, 
-  FileText, 
   ShieldCheck, 
   Compass, 
   Lightbulb, 
   Layers, 
   FileQuestion,
   HelpCircle,
-  Sparkles,
-  X,
-  User,
-  Mail,
-  Lock,
-  GraduationCap,
-  BookOpen,
-  Users,
-  LogOut,
-  Loader2,
-  AlertCircle,
-  Phone,
-  Calendar
+  Sparkles
 } from 'lucide-react';
-import { api } from '../utils/api';
 
 const stats = [
   { value: '50,000+', label: 'Students Assessed', icon: Cpu },
@@ -92,96 +78,6 @@ const steps = [
 
 export default function LandingPage() {
   const router = useRouter();
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authMode, setAuthMode] = useState<'signup' | 'signin'>('signup');
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [age, setAge] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const localUser = localStorage.getItem('cs_iq_user');
-    if (localUser) {
-      try {
-        setUser(JSON.parse(localUser));
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.clear();
-    sessionStorage.clear();
-    setUser(null);
-    router.push('/');
-  };
-
-  const handleAuthSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-
-    try {
-      if (authMode === 'signup') {
-        const res = await api.post('/auth/register', {
-          fullName,
-          email,
-          password,
-          phone,
-          age: age ? Number(age) : null
-        });
-        localStorage.setItem('cs_iq_token', res.token);
-        localStorage.setItem('cs_iq_user', JSON.stringify(res.user));
-        setUser(res.user);
-        setShowAuthModal(false);
-        router.push('/instructions');
-      } else {
-        const res = await api.post('/auth/login', {
-          email,
-          password
-        });
-        localStorage.setItem('cs_iq_token', res.token);
-        localStorage.setItem('cs_iq_user', JSON.stringify(res.user));
-        setUser(res.user);
-        setShowAuthModal(false);
-        router.push('/instructions');
-      }
-    } catch (err: any) {
-      console.error('[Auth Modal Error]:', err);
-      setError(err.message || 'Authentication failed. Please check your credentials.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setError('');
-    setLoading(true);
-    try {
-      const res = await api.post('/auth/register', {
-        fullName: 'Jane Doe (Google)',
-        email: 'google_' + Math.random().toString(36).substring(2, 7) + '@gmail.com',
-        password: 'password123',
-        phone: '+919999988888',
-        age: 21
-      });
-      localStorage.setItem('cs_iq_token', res.token);
-      localStorage.setItem('cs_iq_user', JSON.stringify(res.user));
-      setUser(res.user);
-      setShowAuthModal(false);
-      router.push('/instructions');
-    } catch (err: any) {
-      console.error('[Google Login Error]:', err);
-      setError(err.message || 'Google Auth simulation failed.');
-    } finally {
-      setLoading(false);
-    }
-  };
   return (
     <div className="flex-1 flex flex-col bg-white text-black relative overflow-hidden font-sans">
       {/* Background Decorative Blobs */}
